@@ -10,6 +10,7 @@ if __name__ == '__main__' and __package__ is None:
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 import PopulationLib as PLib
 from PopulationLib import TreeGroup
+from os import path
 
 
 ## Initializes groups of tree population and defines necessary functions.
@@ -96,7 +97,8 @@ class GroupPlanting(TreeGroup):
         for arg in args.iterdescendants():
             tag = arg.tag
             if tag == "filename":
-                filename = arg.text
+                fn = arg.text
+                filename = path.join(path.dirname(path.dirname(path.abspath(__file__))),fn)
             elif tag == "n_recruitment_per_step":
                 self.n_recruitment = int(arg.text)
             if tag != "n_recruitment_per_step":
