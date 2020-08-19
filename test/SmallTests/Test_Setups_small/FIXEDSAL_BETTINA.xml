@@ -25,8 +25,8 @@
                     <x_2> 20 </x_2>
                     <y_2> 20 </y_2>
                 </domain>
-                <n_individuals> 0 </n_individuals>
-                <n_recruitment_per_step> 0 </n_recruitment_per_step>
+                <n_individuals> 10 </n_individuals>
+                <n_recruitment_per_step> 1 </n_recruitment_per_step>
             </distribution>
         </group>
         <group>
@@ -40,7 +40,7 @@
                     <x_2> 20 </x_2>
                     <y_2> 20 </y_2>
                 </domain>
-                <n_individuals> 1 </n_individuals>
+                <n_individuals> 50 </n_individuals>
             </distribution>
         </group>
     </initial_population>
