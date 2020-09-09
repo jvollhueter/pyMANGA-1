@@ -16,6 +16,7 @@ manga_root_directory = path.dirname(
 filepath_examplesetups = path.join(path.dirname(path.abspath(__file__)),
                                    "Test_Setups_small/*.xml")
 xml = glob.glob(filepath_examplesetups)
+example_setups=[]
 errors = []
 errors_compare = []
 errors_empty_comparison=[]
@@ -73,10 +74,12 @@ if xml:
         comparison_file_dir_in_pieces = (path.join(path.dirname(path.abspath(__file__))),"comparison_files",filename,"*.*")            
         comparison_file_dir = seperator.join(comparison_file_dir_in_pieces)
         files_comparison=glob.glob(comparison_file_dir)
+        example_setups.append(filename)
             
             
         class MyTest(unittest.TestCase):
             def test1(self):
+                #Test of MANGA project file and the and the correct calculation of its.
                 try:
                     prj = XMLtoProject(xml_project_file=xmlfile)
                     time_stepper = TreeDynamicTimeStepping(prj)
@@ -100,17 +103,36 @@ if xml:
         if __name__ == "__main__":
             unittest.main(exit=False)
         
-        if not output_exist:
-            shutil.rmtree((output_dir[:-1]), ignore_errors=True)
-        elif output_exist:
-            old_results = glob.glob(path.join(output_dir, "*.*"))
-            for result in old_results:
-                os.remove(result)
+        #remove created output
+        if not output_type == "NONE":
+            if not output_exist:
+                shutil.rmtree((output_dir[:-1]), ignore_errors=True)
+            elif output_exist:
+                old_results = glob.glob(path.join(output_dir, "*.*"))
+                for result in old_results:
+                    os.remove(result)
 
-    print("The setup", xmlfile, "was tested.")
-    print("________________________________________________")
+        print("The setup", xmlfile, "was tested.")
+        print("________________________________________________")
+    
+    print("")
     print("The testing of all example setups is finished.")
     print("")
+    print("________________________________________________")
+    print("________________________________________________")
+    print("")
+    print("Report")
+    print("________________________________________________")
+    print("________________________________________________")
+    print("")
+    if not len(example_setups) == 1:
+        print("The following sample setups have been tested:")
+    else:
+        print("The following sample setup have been tested:")
+    print("")
+    for setup in example_setups:
+        print("")
+        print(setup)
     
     print("________________________________________________")
     print("________________________________________________")
@@ -131,7 +153,7 @@ if xml:
         print("")
     else:
         print("The tests of all example setups were successful.")
-        print("")
+        
         
     print("________________________________________________")
     print("________________________________________________")
@@ -171,7 +193,6 @@ if xml:
                     print("")
                 n=len(errors_empty_results)
                 for x in n:
-                    print("")
                     print(errors_empty_results[x])
                     print("")
         else:
@@ -190,4 +211,6 @@ if xml:
                     print("The comparison of the result of the example setups with the comparison files was successful.")
             else:
                 print("The comparison of the result of the example setups with the comparison files was successful.")
+    print("________________________________________________")
+    print("________________________________________________")  
 else: print("Unfortunately no project-file could be found.")
