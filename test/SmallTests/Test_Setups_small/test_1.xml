@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MangaProject>
+    <tree_dynamics>
+        <aboveground_competition>
+            <type> SimpleTest </type> 
+        </aboveground_competition>
+        <belowground_competition>
+            <type> FixedSalinity </type>
+            <salinity> 0.03 0.06 </salinity>
+            <max_x> 100 </max_x>
+            <min_x> 0 </min_x>
+        </belowground_competition>
+        <tree_growth_and_death>
+            <type> SimpleBettina </type>
+        </tree_growth_and_death>
+    </tree_dynamics>
+    <initial_population>
+        <group>
+            <name> Avicennia </name>
+            <species> Avicennia </species>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 100 </x_2>
+                    <y_2> 20 </y_2>
+                </domain>
+                <n_individuals> 100 </n_individuals>
+                <n_recruitment_per_step> 40 </n_recruitment_per_step>
+            </distribution>
+        </group>
+        <group>
+            <name> Saltmarsh </name>
+            <species> Saltmarsh </species>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 100 </x_2>
+                    <y_2> 20 </y_2>
+                </domain>
+                <n_individuals> 100 </n_individuals>
+                <n_recruitment_per_step> 40 </n_recruitment_per_step>
+            </distribution>
+        </group>
+    </initial_population>
+    <tree_time_loop>
+        <type> Simple </type>
+        <t_start> 0 </t_start>
+        <t_end> 1576800000 </t_end> <!-- 47304000000 -->
+        <delta_t> 864000 </delta_t>
+    </tree_time_loop>
+    <visualization>
+        <type> NONE </type>
+    </visualization>
+    <tree_output>
+        <type> OneTimestepOneFilePerGroup </type>
+        <output_each_nth_timestep> 100 </output_each_nth_timestep>
+        <output_dir> test/testoutputs/ </output_dir>
+        <geometry_output> h_root </geometry_output>
+        <geometry_output> h_crown </geometry_output>
+        <geometry_output> r_root </geometry_output>
+        <geometry_output> r_stem </geometry_output>
+        <geometry_output> h_stem </geometry_output>
+        <geometry_output> r_crown </geometry_output>
+        <growth_output> volume </growth_output>
+        <growth_output> maintenance </growth_output>
+        <growth_output> bg_resources </growth_output>
+        <growth_output> ag_resources </growth_output>
+        <growth_output> available_resources </growth_output>
+        <growth_output> root_surface_resistance </growth_output>
+        <growth_output> xylem_resistance </growth_output>
+        <growth_output> psi_zero </growth_output>
+        <growth_output> salinity </growth_output>
+        <growth_output> weight_girthgrowth </growth_output>
+        <growth_output> weight_stemgrowth </growth_output>
+        <growth_output> weight_crowngrowth </growth_output>
+        <growth_output> weight_rootgrowth </growth_output>
+    </tree_output>
+</MangaProject>
