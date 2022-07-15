@@ -10,3 +10,4 @@ from .GroupPlanting import GroupPlanting
 from .Population import Population
 from .Tree import Tree
 from .Species import Avicennia
+from .Species import Saltmarsh

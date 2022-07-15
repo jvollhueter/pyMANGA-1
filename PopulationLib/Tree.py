@@ -29,6 +29,9 @@ class Tree:
         if species == "Avicennia":
             from PopulationLib.Species import Avicennia
             self.geometry, self.parameter = Avicennia.createTree()
+        elif species == "Saltmarsh":
+            from PopulationLib.Species import Saltmarsh
+            self.geometry, self.parameter = Saltmarsh.createTree()
         elif "/" in species:
             try:
                 spec = importlib.util.spec_from_file_location("", species)

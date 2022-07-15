@@ -66,8 +66,6 @@ class SimpleBettina(TreeModel):
         geometry["h_root"] = self.h_root
         geometry["r_stem"] = self.r_stem
         geometry["h_stem"] = self.h_stem
-        growth_concept_information["volume"] = self.volume
-        growth_concept_information["maintenance"] = self.maint
         growth_concept_information[
             "root_surface_resistance"] = self.root_surface_resistance
         growth_concept_information["xylem_resistance"] = self.xylem_resistance

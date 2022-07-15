@@ -9,3 +9,4 @@ if __name__ == '__main__':
     import Avicennia
 else:
     from . import Avicennia
+    from . import Saltmarsh
