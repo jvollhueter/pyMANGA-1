@@ -2,7 +2,15 @@
 <MangaProject>
     <tree_dynamics>
         <aboveground_competition>
-            <type> SimpleTest </type> 
+            <type> SimpleAsymmetricZOI </type> 
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 100 </x_2>
+                    <y_2> 20 </y_2>
+                </domain>
+            <x_resolution> 800 </x_resolution>
+            <y_resolution> 800 </y_resolution>
         </aboveground_competition>
         <belowground_competition>
             <type> FixedSalinity </type>
@@ -57,7 +65,7 @@
     </visualization>
     <tree_output>
         <type> OneTimestepOneFilePerGroup </type>
-        <output_each_nth_timestep> 100 </output_each_nth_timestep>
+        <output_each_nth_timestep> 25 </output_each_nth_timestep>
         <output_dir> test/testoutputs/ </output_dir>
         <geometry_output> h_root </geometry_output>
         <geometry_output> h_crown </geometry_output>
