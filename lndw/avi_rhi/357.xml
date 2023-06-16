@@ -15,7 +15,7 @@
             <type> FixedSalinity </type>
             <min_x>0</min_x>
             <max_x>50</max_x>
-            <salinity>3.5 7</salinity>
+            <salinity>0.035 0.07</salinity>
         </belowground>
     </resources>
     <plant_dynamics>
