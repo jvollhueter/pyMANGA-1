@@ -82,4 +82,5 @@ def main(argv):
 
 if __name__ == "__main__":
     sys.path.append((path.dirname(path.abspath(__file__))))
+    print(sys.argv[1:])
     main(sys.argv[1:])

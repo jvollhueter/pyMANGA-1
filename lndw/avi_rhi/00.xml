@@ -1,0 +1,82 @@
+<MangaProject>
+    <resources>
+        <aboveground>
+            <type> SimpleAsymmetricZOI </type>
+            <domain>
+                <x_1> 0 </x_1>
+                <y_1> 0 </y_1>
+                <x_2> 50 </x_2>
+                <y_2> 20 </y_2>
+            <x_resolution> 500 </x_resolution>
+            <y_resolution> 88 </y_resolution>
+            </domain>
+        </aboveground>
+        <belowground>
+            <type> FixedSalinity </type>
+            <min_x>0</min_x>
+            <max_x>50</max_x>
+            <salinity>0.0 0.0</salinity>
+        </belowground>
+    </resources>
+    <plant_dynamics>
+        <type> Bettina </type>
+        <mortality>NoGrowth</mortality>
+    </plant_dynamics>
+    <population>
+        <group>
+            <name> Avicennia </name>
+            <species> Avicennia </species>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 50 </x_2>
+                    <y_2> 20 </y_2>
+                </domain>
+                <n_individuals> 100 </n_individuals>
+                <n_recruitment_per_step> 40 </n_recruitment_per_step>
+            </distribution>
+        </group>
+        <group>
+            <name> Rhizophora </name>
+            <species> Rhizophora </species>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 50 </x_2>
+                    <y_2> 20 </y_2>
+                </domain>
+                <n_individuals> 100 </n_individuals>
+                <n_recruitment_per_step> 40 </n_recruitment_per_step>
+            </distribution>
+        </group>
+    </population>
+    <time_loop>
+        <type> Simple </type>
+        <t_start> 0 </t_start>
+        <t_end> 6307200000 </t_end>
+        <delta_t> 31536000 </delta_t>
+    </time_loop>
+    <visualization>
+        <type> ComplexPyplot </type>
+        <max_fps> 0.25 </max_fps>
+    </visualization>
+    <output>
+        <type> OneTimestepOneFile </type>
+        <output_each_nth_timestep>10</output_each_nth_timestep>
+        <allow_previous_output>True</allow_previous_output>
+        <output_dir>Benchmarks/TestOutputs/</output_dir>
+        <geometry_output> r_stem </geometry_output>
+        <geometry_output> h_stem </geometry_output>
+        <geometry_output> r_crown </geometry_output>
+        <geometry_output> r_root </geometry_output>
+        <growth_output> growth </growth_output>
+        <growth_output> ag_resources </growth_output>
+        <growth_output> bg_resources </growth_output>
+        <growth_output> salinity </growth_output>
+    </output>
+</MangaProject>
+

@@ -25,7 +25,7 @@ class ComplexPyplot(Visualization):
             print("Tag 'max_fps' in '" + self.case +
                   "' visualization is missing! Figure is shown for 3 s.")
 
-        fig = plt.figure(figsize=(4, 4),
+        fig = plt.figure(figsize=(8, 4),
                          constrained_layout=False)
         gs = GridSpec(4, 4)
         self._ax1 = fig.add_subplot(gs[:, :])
@@ -67,10 +67,11 @@ class ComplexPyplot(Visualization):
             y = []
             r = []
             s = []
+            h = []
             c = []
 
             for plant in plant_group.getPlants():
-                n.append(species + ': ' + group_name)
+                n.append(group_name)
                 if species == 'Avicennia':
                     color = 'darkolivegreen'
                 elif species == 'Rhizophora':
@@ -82,13 +83,14 @@ class ComplexPyplot(Visualization):
                 x.append(xx)
                 y.append(yy)
                 r.append(plant.getGeometry()["r_crown"])
+                h.append(plant.getGeometry()["h_stem"])
                 c.append(color)
                 try:
                     s.append(plant.getGrowthConceptInformation()['salinity'])
                 except:
                     s.append(np.nan)
-            plants.append(pd.DataFrame(list(zip(n, x, y, r, s, c)),
-                         columns=['name', 'x', 'y', 'r', 's', 'c']))
+            plants.append(pd.DataFrame(list(zip(n, x, y, r, s, h, c)),
+                         columns=['name', 'x', 'y', 'r', 's', 'h', 'c']))
 
         for group in plants:
 
@@ -97,15 +99,18 @@ class ComplexPyplot(Visualization):
                 min_x.append(min(group['x']))
                 max_y.append(max(group['y']))
                 min_y.append(min(group['y']))
-            for n in group.index:
-                circle = patch.Circle((group['x'][n], group['y'][n]),
-                                      radius=group['r'][n],
-                                      label=group['name'][n],
-                                      color=group['c'][n])
-                self._ax1.add_patch(circle)
 
-                legend_without_duplicate_labels(self._ax1)
+        all_plants = pd.concat(plants).sort_values(by='h', ignore_index=True)
+        print(all_plants)
 
+        for n in all_plants.index:
+            circle = patch.Circle((all_plants['x'][n], all_plants['y'][n]),
+                                  radius=all_plants['r'][n],
+                                  label=all_plants['name'][n],
+                                  color=all_plants['c'][n])
+            self._ax1.add_patch(circle)
+
+        legend_without_duplicate_labels(self._ax1)
         max_x = max(max_x) + 2
         min_x = min(min_x) - 2
         max_y = max(max_y) + 2
