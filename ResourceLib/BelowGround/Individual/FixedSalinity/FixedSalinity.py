@@ -42,11 +42,9 @@ class FixedSalinity(ResourceModel):
         """
         x, y = plant.getPosition()
         geometry = plant.getGeometry()
-        parameter = plant.getParameter()
         self._xe.append(x)
-        self._h_stem.append(geometry["h_stem"])
-        self._r_crown.append(geometry["r_crown"])
-        self._psi_leaf.append(parameter["leaf_water_potential"])
+        self._h_stem.append(geometry["h_ag"])
+        self._r_crown.append(geometry["r_ag"])
 
     def calculateBelowgroundResources(self):
         """
@@ -56,10 +54,8 @@ class FixedSalinity(ResourceModel):
             numpy array of shape(number_of_trees)
         """
         salinity_plant = self.getPlantSalinity()
-        psi_zero = np.array(self._psi_leaf) + (2 * np.array(self._r_crown) +
-                                               np.array(self._h_stem)) * 9810
-        psi_sali = np.array(psi_zero) + 85000000 * salinity_plant
-        self.belowground_resources = psi_sali / psi_zero
+        self.salinity = salinity_plant
+        self.belowground_resources = 1 - salinity_plant * 10
 
     def getPlantSalinity(self):
         """

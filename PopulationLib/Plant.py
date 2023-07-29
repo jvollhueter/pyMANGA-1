@@ -30,6 +30,9 @@ class Plant:
         if species == "Avicennia":
             from PopulationLib.Species import Avicennia
             self.geometry, self.parameter = Avicennia.createPlant()
+        elif species == "Saltmarsh":
+            from PopulationLib.Species import Saltmarsh
+            self.geometry, self.parameter = Saltmarsh.createPlant()
         elif "/" in species:
             try:
                 spec = importlib.util.spec_from_file_location("", species)

@@ -134,9 +134,8 @@ class SimpleAsymmetricZOI(ResourceModel):
     def addPlant(self, plant):
         x, y = plant.getPosition()
         geometry = plant.getGeometry()
-        parameter = plant.getParameter()
 
-        if geometry["r_crown"] < self.min_r_crown:
+        if geometry["r_ag"] < self.min_r_crown:
             print("Error: mesh not fine enough for crown dimensions!")
             print(
                 "Please refine mesh or increase initial crown radius above " +
@@ -148,5 +147,5 @@ class SimpleAsymmetricZOI(ResourceModel):
                              in project file!!""")
         self.xe.append(x)
         self.ye.append(y)
-        self.h_stem.append(geometry["h_stem"])
-        self.r_crown.append(geometry["r_crown"])
+        self.h_stem.append(geometry["h_ag"])
+        self.r_crown.append(geometry["r_ag"])

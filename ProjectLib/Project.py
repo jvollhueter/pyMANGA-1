@@ -99,6 +99,8 @@ class MangaProject:
             from PlantModelLib.SimpleKiwi import SimpleKiwi as createGD
         elif case == "NetworkBettina":
             from PlantModelLib.NetworkBettina import NetworkBettina as createGD
+        elif case == "Saltmarsh":
+            from PlantModelLib.Saltmarsh import Saltmarsh as createGD
         else:
             raise KeyError("Required plant dynamic concept not implemented.")
         self.plant_dynamic_concept = createGD(arg)
