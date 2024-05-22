@@ -30,6 +30,8 @@ class Mortality:
         modules = cases.split()
         # Iterate through module list
         for module in modules:
+            print("____")
+            print("module: ", module)
             # Find belowground resource subfolde
             module_dir = 'PlantModelLib.Mortality.'
             my_instance = MangaProject.importModule(self=self,

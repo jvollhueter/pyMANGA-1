@@ -9,18 +9,17 @@ class Threshold(NoGrowth):
     """
     Threshold mortality module.
     """
-    def __init__(self, args, case):
+    def __init__(self, args):
         """
         Args:
             args: module specification from project file tags
             case: "Threshold" (module name)
         """
-        super().__init__(args, case)
+        super().__init__(args)
         # Read input parameters from xml file
         self.getInputParameters(args)
 
     def setSurvive(self, plant_module):
-
         self._survive = 1
 
         if self.threshold_type == "biovolume":
@@ -39,6 +38,7 @@ class Threshold(NoGrowth):
             "prj_file": args,
             "optional": ["type", "mortality", "threshold", "threshold_type"]
         }
+        print("tags: ", tags)
         super().getInputParameters(**tags)
 
         # Set default values if no inputs are given

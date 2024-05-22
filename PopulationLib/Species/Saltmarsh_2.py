@@ -19,5 +19,5 @@ def createPlant():
     parameter["bb"] = 1
     parameter["fmin"] = 0.1
     parameter["salt_effect_d"] = -0.1
-    parameter["salt_effect_ui"] = 80
+    parameter["salt_effect_ui"] = 100
     return geometry, parameter
