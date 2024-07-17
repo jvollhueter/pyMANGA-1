@@ -9,7 +9,7 @@ def createPlant():
     geometry["r_bg"] = 0.05
     geometry["h_bg"] = 0.1
     parameter["maint_factor"] = 0.00002
-    parameter["growth_factor"] = 0.0000002
+    parameter["growth_factor"] = 0.0000001
     parameter['w_b_a'] = 0.7
     parameter['w_ag'] = 0.2
     parameter['w_bg'] = 0.6

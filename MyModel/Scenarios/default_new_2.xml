@@ -1,0 +1,141 @@
+<MangaProject>
+    <resources>
+        <aboveground>
+            <type> AsymmetricZOI </type>
+            <domain>
+                <x_1> 0 </x_1>
+                <y_1> 0 </y_1>
+                <x_2> 10 </x_2>
+                <y_2> 10 </y_2>
+            <x_resolution> 200 </x_resolution>
+            <y_resolution> 200 </y_resolution>
+            </domain>
+        </aboveground>
+        <belowground>
+            <type> Merge </type>
+            <modules>FixedSalinity SymmetricZOI</modules>
+            <domain>
+                <x_1> 0 </x_1>
+                <y_1> 0 </y_1>
+                <x_2> 10 </x_2>
+                <y_2> 10 </y_2>
+            </domain>
+            <x_resolution> 200 </x_resolution>
+            <y_resolution> 200 </y_resolution>
+            <variant> forman </variant>
+            <min_x>0</min_x>
+            <max_x>100</max_x>
+            <salinity>0.06 0.085</salinity>
+        </belowground>
+    </resources>
+    <population>
+        <group>
+            <name> Saltmarsh_1 </name>
+            <species> PopulationLib/Species/Saltmarsh_1.py </species>
+            <vegetation_model_type> Saltmarsh </vegetation_model_type>
+            <mortality> Threshold </mortality>
+            <threshold_type> biovolume Random </threshold_type>
+            <threshold> 1.5707963267948967e-06 </threshold>
+            <probability> 0.25 </probability>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 10 </x_2>
+                    <y_2> 10 </y_2>
+                </domain>
+                <n_recruitment_per_step> 5 </n_recruitment_per_step>
+                <n_individuals> 50 </n_individuals>
+            </distribution>
+        </group>
+        <group>
+            <name> Saltmarsh_2 </name>
+            <species> PopulationLib/Species/Saltmarsh_2.py </species>
+            <vegetation_model_type> Saltmarsh </vegetation_model_type>
+            <mortality> Threshold Random </mortality>
+            <threshold_type> biovolume </threshold_type>
+            <threshold> 1.5707963267948967e-06 </threshold>
+            <probability> 0.25 </probability>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 10 </x_2>
+                    <y_2> 10 </y_2>
+                </domain>
+                <n_recruitment_per_step> 5 </n_recruitment_per_step>
+                <n_individuals> 50 </n_individuals>
+            </distribution>
+        </group>
+        <group>
+            <name> Saltmarsh_3 </name>
+            <species> PopulationLib/Species/Saltmarsh_3.py </species>
+            <vegetation_model_type> Saltmarsh </vegetation_model_type>
+            <mortality> Threshold Random </mortality>
+            <threshold_type> biovolume </threshold_type>
+            <threshold> 1.5707963267948967e-06 </threshold>
+            <probability> 0.25 </probability>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 10 </x_2>
+                    <y_2> 10 </y_2>
+                </domain>
+                <n_recruitment_per_step> 5 </n_recruitment_per_step>
+                <n_individuals> 50 </n_individuals>
+            </distribution>
+        </group>
+        <group>
+            <name> Saltmarsh_4 </name>
+            <species> PopulationLib/Species/Saltmarsh_4.py </species>
+            <vegetation_model_type> Saltmarsh </vegetation_model_type>
+            <mortality> Threshold Random </mortality>
+            <threshold_type> biovolume </threshold_type>
+            <threshold> 1.5707963267948967e-06 </threshold>
+            <probability> 0.25 </probability>
+            <distribution>
+                <type> Random </type>
+                <domain>
+                    <x_1> 0 </x_1>
+                    <y_1> 0 </y_1>
+                    <x_2> 10 </x_2>
+                    <y_2> 10 </y_2>
+                </domain>
+                <n_recruitment_per_step> 1 </n_recruitment_per_step>
+                <n_individuals> 50 </n_individuals>
+            </distribution>
+        </group>
+    </population>
+    <time_loop>
+        <type> Simple </type>
+        <t_start> 0 </t_start>
+        <t_end> 64000000 </t_end>
+        <delta_t> 86400 </delta_t>
+        <terminal_print>days</terminal_print>
+    </time_loop>
+    <visualization>
+        <type> NONE </type>
+    </visualization>
+    <output>
+        <type> OneTimestepOneFilePerGroup </type>
+        <output_time_range > [0, 64000000] </output_time_range >
+        <allow_previous_output>True</allow_previous_output>
+        <output_dir>MyModel/Outputs/default_2</output_dir>
+        <geometry_output> r_ag </geometry_output>
+        <geometry_output> h_ag </geometry_output>
+        <geometry_output> r_bg </geometry_output>
+        <geometry_output> h_bg </geometry_output>
+        <growth_output> growth </growth_output>
+        <growth_output> maint </growth_output>
+        <growth_output> ag_factor </growth_output>
+        <growth_output> bg_factor </growth_output>
+        <growth_output> w_r_ag </growth_output>
+        <growth_output> w_h_ag </growth_output>
+        <growth_output> w_r_bg </growth_output>
+        <growth_output> w_h_bg </growth_output>
+    </output>
+</MangaProject>

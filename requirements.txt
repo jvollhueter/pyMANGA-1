@@ -5,7 +5,6 @@ matplotlib
 pandas
 pytest-subtests
 pdoc
-vtk == 9.2.2 # required for OpenGeoSys
 coverage
 interrogate
-scipy # required for SolarRadiation above-ground concept
+scipy
