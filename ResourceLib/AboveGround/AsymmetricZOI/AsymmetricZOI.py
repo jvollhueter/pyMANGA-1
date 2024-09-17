@@ -46,6 +46,8 @@ class AsymmetricZOI(ResourceModel):
         #Check for each plant, at which gridpoint it is the highest plant
         for i in range(len(self.xe)):
             wins[i] = len(np.where(highest_plant == i)[0])
+        print('ag_resources:')
+        print(self.aboveground_resources)
         self.aboveground_resources = wins / crown_areas
 
     def calculateHeightFromDistance(self, stem_height, crown_radius, distance):
