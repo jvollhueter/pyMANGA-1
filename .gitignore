@@ -116,3 +116,4 @@ venv.bak/
 # OGS source
 ResourceLib/BelowGround/Individual/OGS/bin
 ResourceLib/BelowGround/Individual/OGS/ogs-*
+MyModel/

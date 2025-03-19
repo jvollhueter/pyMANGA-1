@@ -66,6 +66,13 @@ class Saltmarsh(PlantModel):
         growth_concept_information["w_h_ag"] = self.w_h_ag
         growth_concept_information["w_r_ag"] = self.w_r_ag
 
+        try:
+            growth_concept_information["age"] += self.time
+            self.age = growth_concept_information["age"]
+        except KeyError:
+            growth_concept_information["age"] = self.time
+            self.age = self.time
+
         # Get Mortality-related variables
         super().getMortalityVariables(growth_concept_information)
 

@@ -3,6 +3,7 @@
 import numpy as np
 from PlantModelLib.Mortality.NoGrowth import NoGrowth
 from PlantModelLib.PlantModel import PlantModel
+import random
 
 
 class Memory(NoGrowth):
@@ -31,7 +32,7 @@ class Memory(NoGrowth):
         self._survive = 1
 
         # Get the number of values representing the memory period
-        steps = int(self.period / plant_module.time)
+        steps = int(eval(self.period) / plant_module.time)
 
         # Slice grow_memory array to get only relevant data
         relevant_grow_memory = plant_module.grow_memory[-steps:]
