@@ -25,6 +25,11 @@ class Threshold(NoGrowth):
         if self.threshold_type == "biovolume":
             if plant_module.volume < self.threshold:
                 self._survive = 0
+            try:
+                if self.age > 3.154e+7 and self.volume < 0.01:
+                    self._survive = 0
+            except:
+                pass
         else:
             AttributeError("Threshold type not implemented.")
 
