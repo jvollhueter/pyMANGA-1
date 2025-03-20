@@ -35,7 +35,6 @@ class Saltmarsh(PlantModel):
         self.w_r_ag = 0
 
     def progressPlant(self, plant, aboveground_factor, belowground_factor):
-
         geometry = plant.getGeometry()
         growth_concept_information = plant.getGrowthConceptInformation()
         self.parameter = plant.getParameter()
