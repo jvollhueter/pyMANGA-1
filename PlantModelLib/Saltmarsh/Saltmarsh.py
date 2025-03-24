@@ -118,6 +118,7 @@ class Saltmarsh(PlantModel):
             float
         """
         if (self.bg_factor + self.ag_factor) != 0:
+            # Selina: Don't understand why +-20%.
             # normalization leads to adapation of -20 to +20 % of w_ratio_b_a
             ratio_b_a_resource = ((self.bg_factor / (self.bg_factor + self.ag_factor)) - 0.5) * 0.4
 
@@ -147,6 +148,8 @@ class Saltmarsh(PlantModel):
         """
         self.volume_ag = np.pi * self.r_ag ** 2 * self.h_ag
         self.volume_bg = np.pi * self.r_bg ** 2 * self.h_bg
+        # Selina: Why not r_volumne_ag_bg? Also: This is never used again right?
+        # And what is this?
         self.r_volum_ag_bg = self.volume_ag / self.volume_bg
         self.volume = self.volume_ag + self.volume_bg
 
@@ -161,5 +164,6 @@ class Saltmarsh(PlantModel):
 
         self.grow = self.parameter["growth_factor"] * (self.available_resources - self.maint) * self.time
 
+        # Selina: Why call it tree here when above you call it plant?
         # Check if trees survive based on selected mortality concepts
         super().setTreeKiller()
