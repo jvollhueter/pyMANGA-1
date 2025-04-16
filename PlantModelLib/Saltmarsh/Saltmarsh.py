@@ -142,7 +142,13 @@ class Saltmarsh(PlantModel):
         """
         Calculate the total plant volume.
         Saltmarsh plants consist of two cylinders, one above- and one belowground.
+        These two cylinders define the aboveground and belowground volume of the plant.
         These are each characterised by the cylinder height and cylinder radius.
+        So there are:
+        h_ag: aboveground height [m]
+        r_ag: aboveground radius [m]
+        h_bg: belowground height [m]
+        r_bg: belowground radius [m]
         Sets:
             float
         """
