@@ -16,10 +16,6 @@ class FON(ResourceModel):
         case = args.find("type").text
         self.getInputParameters(args)
         super().makeGrid()
-        if self.mesh_size > 0.25:
-            print("Error: mesh not fine enough for FON!")
-            print("Please refine mesh to grid size < 0.25m !")
-            exit()
 
     def prepareNextTimeStep(self, t_ini, t_end):
         self._fon_area = []
@@ -47,6 +43,11 @@ class FON(ResourceModel):
         self._bb.append(parameter["bb"])
         self._fmin.append(parameter["fmin"])
         self._phi.append(parameter.get("phi", 2.0))
+        fon_radius = parameter["aa"] * geometry["r_stem"] ** parameter["bb"]
+        if not hasattr(self, '_mesh_warned') and fon_radius < self.mesh_size:
+            print(f"Warning: plant FON radius ({fon_radius:.4f}m) is smaller than "
+                  f"mesh size ({self.mesh_size:.4f}m). Competition may not be resolved.")
+            self._mesh_warned = True
 
     def calculateBelowgroundResources(self):
         """

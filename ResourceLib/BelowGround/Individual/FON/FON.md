@@ -115,7 +115,7 @@ where edge effects would otherwise bias plants near the domain boundary.
 
 **Restrictions**
 
-- The mesh should be fine enough to resolve each plant's FON field. At initialization, the code checks that the mesh size does not exceed 0.25 m (see `FON.py`). Users should choose a resolution appropriate for their simulation setup.
+- The mesh should be fine enough to resolve each plant's FON field. A warning is issued if any plant's FON radius (``aa`` * ``r_stem`` ^ ``bb``) is smaller than the mesh size.
 
 # References
 
