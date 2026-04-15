@@ -16,10 +16,6 @@ class FON(ResourceModel):
         case = args.find("type").text
         self.getInputParameters(args)
         super().makeGrid()
-        if self.mesh_size > 0.25:
-            print("Error: mesh not fine enough for FON!")
-            print("Please refine mesh to grid size < 0.25m !")
-            exit()
 
     def prepareNextTimeStep(self, t_ini, t_end):
         self._fon_area = []
@@ -31,6 +27,7 @@ class FON(ResourceModel):
         self._aa = []
         self._bb = []
         self._fmin = []
+        self._phi = []
         self._t_ini = t_ini
         self._t_end = t_end
         self._fon_height = np.zeros_like(self.my_grid[0])
@@ -45,6 +42,12 @@ class FON(ResourceModel):
         self._aa.append(parameter["aa"])
         self._bb.append(parameter["bb"])
         self._fmin.append(parameter["fmin"])
+        self._phi.append(parameter.get("phi", 2.0))
+        fon_radius = parameter["aa"] * geometry["r_stem"] ** parameter["bb"]
+        if not hasattr(self, '_mesh_warned') and fon_radius < self.mesh_size:
+            print(f"Warning: plant FON radius ({fon_radius:.4f}m) is smaller than "
+                  f"mesh size ({self.mesh_size:.4f}m). Competition may not be resolved.")
+            self._mesh_warned = True
 
     def calculateBelowgroundResources(self):
         """
@@ -56,10 +59,15 @@ class FON(ResourceModel):
         self._aa = np.array(self._aa)
         self._bb = np.array(self._bb)
         self._fmin = np.array(self._fmin)
-        distance = (((self.my_grid[0][:, :, np.newaxis] -
-                      np.array(self._xe)[np.newaxis, np.newaxis, :])**2 +
-                     (self.my_grid[1][:, :, np.newaxis] -
-                      np.array(self._ye)[np.newaxis, np.newaxis, :])**2)**0.5)
+        self._phi = np.array(self._phi)
+        dx = (self.my_grid[0][:, :, np.newaxis] -
+              np.array(self._xe)[np.newaxis, np.newaxis, :])
+        dy = (self.my_grid[1][:, :, np.newaxis] -
+              np.array(self._ye)[np.newaxis, np.newaxis, :])
+        if self._periodic_boundary:
+            dx = dx - self._lx * np.round(dx / self._lx)
+            dy = dy - self._ly * np.round(dy / self._ly)
+        distance = (dx**2 + dy**2)**0.5
         my_fon = self.calculateFonFromDistance(distance=distance)
 
         fon_areas = np.zeros_like(my_fon)
@@ -77,7 +85,7 @@ class FON(ResourceModel):
         # tree-to-tree competition, eq. (7) Berger & Hildenbrandt (2000)
         stress_factor = fon_impacts / fon_areas
         stress_factor = np.nan_to_num(stress_factor, nan=0)
-        resource_limitations = 1 - 2 * stress_factor
+        resource_limitations = 1 - self._phi * stress_factor
         resource_limitations[np.where(resource_limitations < 0)] = 0
         self.belowground_resources = resource_limitations
 
@@ -102,7 +110,8 @@ class FON(ResourceModel):
         tags = {
             "prj_file": args,
             "required": ["type", "domain", "x_1", "x_2", "y_1", "y_2", "x_resolution",
-                         "y_resolution"]
+                         "y_resolution"],
+            "optional": ["periodic_boundary"]
         }
         super().getInputParameters(**tags)
         self._x_1 = self.x_1
@@ -111,3 +120,7 @@ class FON(ResourceModel):
         self._y_2 = self.y_2
         self.x_resolution = int(self.x_resolution)
         self.y_resolution = int(self.y_resolution)
+        self._periodic_boundary = self.makeBoolFromArg("periodic_boundary")
+        if self._periodic_boundary:
+            self._lx = self._x_2 - self._x_1
+            self._ly = self._y_2 - self._y_1

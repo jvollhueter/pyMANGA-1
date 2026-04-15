@@ -31,4 +31,5 @@ def createPlant():
     parameter["aa"] = 15
     parameter["bb"] = 0.5
     parameter["fmin"] = 0.15
+    parameter["phi"] = 2.0
     return geometry, parameter

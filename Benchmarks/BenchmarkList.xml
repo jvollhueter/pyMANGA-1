@@ -33,6 +33,7 @@
                     </FixedSalinity>
                     <FON>
                         <test> FON_CI.xml </test>
+                        <test> FON_PBC_CI.xml </test>
                     </FON>
                     <SymmetricZOI>
                         <test> SymmetricZOIcpp_CI.xml </test>
