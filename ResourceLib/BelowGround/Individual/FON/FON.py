@@ -123,6 +123,3 @@ class FON(ResourceModel):
         if self._periodic_boundary:
             self._lx = self._x_2 - self._x_1
             self._ly = self._y_2 - self._y_1
-        else:
-            self._lx = 0.0
-            self._ly = 0.0

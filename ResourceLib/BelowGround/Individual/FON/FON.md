@@ -1,10 +1,10 @@
 # Description
 
-This module calculates the reduction in below-ground resource availability caused by the competition for below-ground resources, e.g., water, between neighboring plants.
+This module calculates the reduction in resource availability caused by the competition for resources between neighboring plants.
 The calculation is based on the Field of Neighbourhood (FON) concept, where each plant generates an exponentially decaying field on a spatial grid.
 Competition is quantified by the overlap of FON fields.
 
-This concepts assumes that a plant without neighbors gets 100% of the available resource.
+This concept assumes that a plant without neighbors gets 100% of the available resource.
 There is no temporal variation in resource availability.
 
 # Usage
@@ -47,13 +47,13 @@ The factor ranges from 0 to 1, with 1 indicating no limitations and 0 indicating
 
 ## Purpose
 
-This module describes below-ground competition between plants and quantifies its strength by means of a factor between 0 and 1.
+This module describes competition between plants and quantifies its strength by means of a factor between 0 and 1.
 It follows the Field of Neighbourhood (FON) concept introduced
 by (<a href="https://doi.org/10.1016/S0304-3800(00)00298-2" target="_blank">Berger and Hildenbrandt, 2000</a>).
 Each plant generates an exponentially decaying field on the grid, and competition is computed
 from the overlap of these fields (Eq. 7 in Berger and Hildenbrandt, 2000).
 
-The effect of FON parameters *a* and *b* is also discussed by
+The effect of FON parameters ``aa`` and ``bb`` is also discussed by
 (<a href="https://doi.org/10.1023/A:1023965512755" target="_blank">Berger and Hildenbrandt, 2003</a>).
 
 ## Process overview
@@ -70,12 +70,11 @@ This module calls the following sub-procedures:
 
 - Create a regular 2D grid (set variables: my_grid, mesh_size)
 - This is called only once, during initialization.
-- The mesh size must not exceed 0.25 m.
 
 ### Add plants (addPlant)
 
 - Add xy-positions, stem radii (``r_stem``), and FON parameters (``aa``, ``bb``, ``fmin``, ``phi``) of all plants in the model
-- FON parameters *a*, *b*, *F<sub>min</sub>* and *phi* are defined in the species file.
+- FON parameters ``aa``, ``bb``, ``fmin`` and ``phi`` are defined in the species file.
 - ``phi`` defaults to 2.0 if not specified in the species file (Eq. 7, Berger and Hildenbrandt, 2000).
 
 ### Below-ground factor (calculateBelowgroundResources)
@@ -83,7 +82,7 @@ This module calls the following sub-procedures:
 - Compute the distance of each plant to each grid node. If periodic boundary conditions are enabled, the minimum image convention is applied.
 - Compute the FON height of each plant at each grid node:
 ```
-fon_radius = a * r_stem^b
+fon_radius = aa * r_stem^bb
 cc = -log(fmin) / (fon_radius - r_stem)
 height = exp(-cc * (distance - r_stem))
 ```
@@ -116,7 +115,7 @@ where edge effects would otherwise bias plants near the domain boundary.
 
 **Restrictions**
 
-- The mesh size must not exceed 0.25 m. The model will exit with an error otherwise.
+- The mesh should be fine enough to resolve each plant's FON field. At initialization, the code checks that the mesh size does not exceed 0.25 m (see `FON.py`). Users should choose a resolution appropriate for their simulation setup.
 
 # References
 
